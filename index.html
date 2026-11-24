@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,450&family=Noto+Sans+SC:wght@400;500&family=Outfit:wght@400;500&display=swap">
+  <style>
+    :root {
+      --bg: #07110f;
+      --raise: #0e1714;
+      --raise-2: #13201c;
+      --ink: #e7f2ee;
+      --muted: #8aa39a;
+      --line: rgba(231, 242, 238, 0.10);
+      --line-strong: rgba(231, 242, 238, 0.28);
+      --accent: #3ee0c5;
+      --warm: #e7c27a;
+      --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+    }
+
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.7;
+      overflow-x: clip;
+    }
+
+    button, input { font: inherit; }
+
+    :focus { outline: none; }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+    .wrap {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    @media (min-width: 1080px) {
+      .wrap { padding: 0 40px; }
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      height: 64px;
+      background: rgba(7, 17, 15, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .bar {
+      position: relative;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      color: var(--ink);
+      font-family: Outfit, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex: none;
+    }
+
+    .nav-center {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-center a {
+      font-family: Outfit, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-family: Outfit, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1;
+      text-decoration: none;
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      transition: border-color 180ms var(--ease);
+    }
+
+    .btn:hover { text-decoration: none; }
+
+    .btn-primary {
+      background: var(--ink);
+      color: var(--bg);
+    }
+
+    .btn-secondary { border-color: var(--line); }
+    .btn-secondary:hover,
+    .btn-text:hover { border-color: var(--line-strong); }
+
+    .eyebrow {
+      margin: 0 0 16px;
+      font-family: Outfit, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      line-height: 1;
+      color: var(--muted);
+    }
+
+    h1, h2, h3 { font-weight: 500; }
+
+    h1 {
+      margin: 0;
+      max-width: 12em;
+      font-family: Newsreader, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", serif;
+      font-weight: 450;
+      font-size: clamp(40px, 5.6vw, 72px);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+
+    h2 {
+      margin: 0;
+      font-family: Outfit, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: clamp(28px, 3vw, 40px);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    h3 {
+      margin: 0;
+      font-family: Outfit, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 20px;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .lede {
+      margin: 24px 0 0;
+      max-width: 38em;
+      color: var(--ink);
+    }
+
+    .note {
+      margin: 8px 0 0;
+      max-width: 38em;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background-image:
+        linear-gradient(rgba(231, 242, 238, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(231, 242, 238, 0.04) 1px, transparent 1px);
+      background-size: 64px 64px;
+    }
+
+    .hero-inner {
+      position: relative;
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      padding: 32px 24px clamp(72px, 9vw, 112px);
+    }
+
+    @media (min-width: 1080px) {
+      .hero-inner { padding-left: 40px; padding-right: 40px; }
+    }
+
+    @media (min-width: 860px) {
+      .hero { min-height: calc(100vh - 64px); }
+      .hero-inner {
+        min-height: calc(100vh - 64px);
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .copy { max-width: 520px; }
+
+    .copy-text,
+    .actions,
+    .endpoint { position: relative; z-index: 1; }
+
+    .copy-text {
+      background: linear-gradient(90deg, #07110f 0%, rgba(7, 17, 15, 0.96) 68%, rgba(7, 17, 15, 0) 100%);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 32px;
+      background: linear-gradient(90deg, rgba(7, 17, 15, 0.96) 0%, rgba(7, 17, 15, 0.9) 70%, rgba(7, 17, 15, 0) 100%);
+    }
+
+    .endpoint {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      max-width: 100%;
+      margin-top: 24px;
+      padding: 8px 8px 8px 16px;
+      background: var(--raise-2);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+
+    .method,
+    .url,
+    code,
+    pre,
+    .num,
+    .code-label {
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+    }
+
+    .method {
+      flex: none;
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    .url {
+      min-width: 0;
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--warm);
+      overflow-wrap: anywhere;
+    }
+
+    .crystal {
+      pointer-events: none;
+    }
+
+    .crystal svg {
+      display: block;
+      width: 240px;
+      height: 240px;
+    }
+
+    .crystal canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .crystal.is-live svg { display: none; }
+
+    @media (min-width: 860px) {
+      .crystal {
+        position: absolute;
+        top: 50%;
+        right: -6%;
+        width: min(640px, 52vw);
+        height: min(640px, calc(100vh - 96px));
+        transform: translateY(-50%);
+      }
+
+      .crystal svg {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+      @media (max-width: 859px) {
+      .nav-center { display: none; }
+
+      .copy { max-width: none; }
+      .copy-text,
+      .actions { background: none; }
+
+      .crystal {
+        position: relative;
+        height: 220px;
+        margin: 24px 0;
+        display: grid;
+        place-items: center;
+      }
+
+      .crystal svg { width: 200px; height: 200px; }
+    }
+
+    .block { padding: clamp(72px, 9vw, 112px) 0; }
+
+    #models, #access { scroll-margin-top: 80px; }
+
+    .head { margin-bottom: 32px; }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .models { grid-template-columns: 1fr; }
+    .caps { grid-template-columns: 1fr; }
+    .access { grid-template-columns: 1fr; align-items: start; }
+
+    @media (min-width: 640px) {
+      .models { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (min-width: 860px) {
+      .caps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .access { grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr); }
+    }
+
+    @media (min-width: 1080px) {
+      .models { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+
+    .card {
+      background: var(--raise);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px;
+      transition: border-color 180ms var(--ease);
+    }
+
+    .card:hover { border-color: var(--line-strong); }
+
+    .model {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .vendor {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      padding: 4px 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 12px;
+      line-height: 1.4;
+      color: var(--muted);
+    }
+
+    .price {
+      margin: auto 0 0;
+      padding-top: 8px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--warm);
+    }
+
+    .num {
+      display: block;
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    .card h3 { margin-top: 12px; }
+
+    .card p {
+      margin: 8px 0 0;
+      color: var(--ink);
+    }
+
+    .steps { display: grid; gap: 16px; }
+
+    .step p { margin-top: 12px; }
+
+    code.inline {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--warm);
+      overflow-wrap: anywhere;
+    }
+
+    .code {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.28);
+      overflow: hidden;
+    }
+
+    .code-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px 8px 8px 22px;
+      background: var(--raise-2);
+    }
+
+    .code-label {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    pre {
+      margin: 0;
+      padding: 22px;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 13px;
+      line-height: 1.65;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .warm { color: var(--warm); }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 28px 0;
+    }
+
+    .foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .copyline {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .foot nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 24px;
+    }
+
+    .foot a {
+      font-family: Outfit, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .reveal {
+      animation: rise 720ms var(--ease) both;
+      animation-delay: calc(var(--d, 0) * 50ms);
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="module">
+    const SITE = {
+      name: "Romai",
+      apiOrigin: "https://myromai.com",
+      apiBase: "https://myromai.com/v1",
+      docUrl: "",
+      contact: "",
+      login: "https://myromai.com/login",
+      register: "https://myromai.com/register",
+      console: "https://myromai.com/dashboard",
+      plaza: "https://myromai.com/model-plaza",
+      models: [
+        { name: "Claude", vendor: "Anthropic", tags: ["文本", "视觉", "工具"] },
+        { name: "GPT", vendor: "OpenAI", tags: ["文本", "视觉", "工具"] },
+        { name: "Gemini", vendor: "Google", tags: ["文本", "视觉", "长上下文"] },
+        { name: "更多模型", vendor: "以控制台为准", tags: ["按接入情况显示"] }
+      ]
+    };
+
+    const endpoint = "POST " + SITE.apiBase + "/chat/completions";
+    const endpointPath = SITE.apiBase + "/chat/completions";
+    const codeText = [
+      "from openai import OpenAI",
+      'client = OpenAI(base_url="' + SITE.apiBase + '", api_key="控制台创建的密钥")',
+      'r = client.chat.completions.create(model="控制台中的模型名", messages=[{"role": "user", "content": "你好"}])'
+    ].join("\n");
+
+    const esc = (value) => String(value).replace(/[&<>"']/g, (ch) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[ch]);
+
+    const link = (href, label, extra) => {
+      const blank = extra && extra.blank ? ' target="_blank" rel="noopener noreferrer"' : "";
+      const cls = extra && extra.className ? ' class="' + extra.className + '"' : "";
+      return '<a href="' + esc(href) + '"' + cls + blank + ">" + label + "</a>";
+    };
+
+    document.title = SITE.name;
+
+    const docLink = SITE.docUrl
+      ? link(SITE.docUrl, "文档", { blank: true })
+      : "";
+    const contactLink = SITE.contact
+      ? link("mailto:" + SITE.contact, "联系")
+      : "";
+    const docButton = SITE.docUrl
+      ? link(SITE.docUrl, "查看文档", { blank: true, className: "btn btn-secondary" })
+      : "";
+
+    const modelCards = SITE.models.map((model, index) => {
+      const vendorClass = model.vendor.indexOf("以控制台为准") !== -1 ? "vendor warm" : "vendor";
+      const tags = model.tags.map((tag) => '<span class="tag">' + esc(tag) + "</span>").join("");
+      return '<article class="card model reveal" style="--d:' + (6 + index) + '">' +
+        "<h3>" + esc(model.name) + "</h3>" +
+        '<p class="' + vendorClass + '">' + esc(model.vendor) + "</p>" +
+        '<div class="tags">' + tags + "</div>" +
+        '<p class="price">上下文与价格以控制台为准</p>' +
+        "</article>";
+    }).join("");
+
+    const crystalSvg = '<svg viewBox="0 0 240 240" aria-hidden="true">' +
+      '<g fill="none" stroke="#3ee0c5" stroke-opacity="0.7" stroke-width="1.2" stroke-linejoin="round">' +
+      '<line x1="98.3" y1="63.9" x2="185.7" y2="48.8"/>' +
+      '<line x1="98.3" y1="63.9" x2="159.6" y2="117.1"/>' +
+      '<line x1="98.3" y1="63.9" x2="78.4" y2="16.0"/>' +
+      '<line x1="98.3" y1="63.9" x2="16.0" y2="97.2"/>' +
+      '<line x1="98.3" y1="63.9" x2="81.1" y2="138.8"/>' +
+      '<line x1="185.7" y1="48.8" x2="159.6" y2="117.1"/>' +
+      '<line x1="185.7" y1="48.8" x2="78.4" y2="16.0"/>' +
+      '<line x1="185.7" y1="48.8" x2="193.4" y2="80.3"/>' +
+      '<line x1="185.7" y1="48.8" x2="224.0" y2="146.9"/>' +
+      '<line x1="42.4" y1="195.8" x2="146.1" y2="224.0"/>' +
+      '<line x1="42.4" y1="195.8" x2="140.7" y2="193.2"/>' +
+      '<line x1="42.4" y1="195.8" x2="18.3" y2="129.4"/>' +
+      '<line x1="42.4" y1="195.8" x2="16.0" y2="97.2"/>' +
+      '<line x1="42.4" y1="195.8" x2="81.1" y2="138.8"/>' +
+      '<line x1="146.1" y1="224.0" x2="140.7" y2="193.2"/>' +
+      '<line x1="146.1" y1="224.0" x2="18.3" y2="129.4"/>' +
+      '<line x1="146.1" y1="224.0" x2="193.4" y2="80.3"/>' +
+      '<line x1="146.1" y1="224.0" x2="224.0" y2="146.9"/>' +
+      '<line x1="140.7" y1="193.2" x2="159.6" y2="117.1"/>' +
+      '<line x1="140.7" y1="193.2" x2="224.0" y2="146.9"/>' +
+      '<line x1="140.7" y1="193.2" x2="81.1" y2="138.8"/>' +
+      '<line x1="159.6" y1="117.1" x2="224.0" y2="146.9"/>' +
+      '<line x1="159.6" y1="117.1" x2="81.1" y2="138.8"/>' +
+      '<line x1="18.3" y1="129.4" x2="78.4" y2="16.0"/>' +
+      '<line x1="18.3" y1="129.4" x2="193.4" y2="80.3"/>' +
+      '<line x1="18.3" y1="129.4" x2="16.0" y2="97.2"/>' +
+      '<line x1="78.4" y1="16.0" x2="193.4" y2="80.3"/>' +
+      '<line x1="78.4" y1="16.0" x2="16.0" y2="97.2"/>' +
+      '<line x1="193.4" y1="80.3" x2="224.0" y2="146.9"/>' +
+      '<line x1="16.0" y1="97.2" x2="81.1" y2="138.8"/>' +
+      "</g></svg>";
+
+    const codeHtml = "from openai import OpenAI\n" +
+      'client = OpenAI(base_url=<span class="warm">"' + esc(SITE.apiBase) + '"</span>, api_key="控制台创建的密钥")\n' +
+      'r = client.chat.completions.create(model="控制台中的模型名", messages=[{"role": "user", "content": "你好"}])';
+
+    document.getElementById("app").innerHTML =
+      "<header>" +
+        '<div class="wrap bar">' +
+          '<div class="brand"><span class="dot" aria-hidden="true"></span><span>' + esc(SITE.name) + "</span></div>" +
+          '<nav class="nav-center" aria-label="页面">' +
+            '<a href="#models">模型</a>' +
+            '<a href="#access">接入</a>' +
+            docLink +
+          "</nav>" +
+          '<div class="nav-right">' +
+            link(SITE.login, "登录", { className: "btn btn-text" }) +
+            link(SITE.console, "进入控制台", { className: "btn btn-primary" }) +
+          "</div>" +
+        "</div>" +
+      "</header>" +
+      "<main>" +
+        '<section class="hero">' +
+          '<div class="hero-inner">' +
+            '<div class="copy">' +
+              '<div class="copy-text">' +
+                '<p class="eyebrow reveal" style="--d:0">Model Gateway</p>' +
+                '<h1 class="reveal" style="--d:1">一个密钥，调用多个模型</h1>' +
+                '<p class="lede reveal" style="--d:2">已接入的 Claude、GPT、Gemini 等模型，用同一把密钥、同一个地址调用。按用量计费。</p>' +
+              "</div>" +
+              '<div class="crystal" id="crystal">' + crystalSvg + "</div>" +
+              '<div class="actions reveal" style="--d:3">' +
+                link(SITE.console, "进入控制台", { className: "btn btn-primary" }) +
+                docButton +
+              "</div>" +
+              '<div class="endpoint reveal" style="--d:4">' +
+                '<span class="method">POST</span>' +
+                '<code class="url">' + esc(endpointPath) + "</code>" +
+                '<button class="btn btn-secondary" type="button" data-copy="endpoint">复制</button>' +
+              "</div>" +
+            "</div>" +
+          "</div>" +
+        "</section>" +
+        '<section class="block" id="models">' +
+          '<div class="wrap">' +
+            '<div class="head reveal" style="--d:5">' +
+              "<h2>模型</h2>" +
+              '<p class="note">能力与价格以控制台列表为准。</p>' +
+            "</div>" +
+            '<div class="grid models">' + modelCards + "</div>" +
+          "</div>" +
+        "</section>" +
+        '<section class="block">' +
+          '<div class="wrap grid caps">' +
+            '<article class="card reveal" style="--d:10"><span class="num">01</span><h3>一键接入</h3><p>一把密钥调用已接入模型，客户端只改地址和密钥。</p></article>' +
+            '<article class="card reveal" style="--d:11"><span class="num">02</span><h3>调度与会话</h3><p>多个上游账号分担请求，会话尽量落在同一上游。</p></article>' +
+            '<article class="card reveal" style="--d:12"><span class="num">03</span><h3>按量与配额</h3><p>按使用量计费，可查看明细，也可给密钥设置上限。</p></article>' +
+          "</div>" +
+        "</section>" +
+        '<section class="block" id="access">' +
+          '<div class="wrap">' +
+            '<div class="head reveal" style="--d:13"><h2>替换地址即可</h2></div>' +
+            '<div class="grid access">' +
+              '<div class="steps">' +
+                '<article class="card step reveal" style="--d:14"><span class="num">01</span><p>' + link(SITE.register, "注册账号") + "</p></article>" +
+                '<article class="card step reveal" style="--d:15"><span class="num">02</span><p>在' + link(SITE.console, "控制台") + "创建密钥</p></article>" +
+                '<article class="card step reveal" style="--d:16"><span class="num">03</span><p>在原来的 OpenAI SDK 里把 base_url 换成 <code class="inline">' + esc(SITE.apiBase) + "</code></p></article>" +
+              "</div>" +
+              '<div class="code reveal" style="--d:17">' +
+                '<div class="code-bar"><span class="code-label">Python</span><button class="btn btn-secondary" type="button" data-copy="code">复制</button></div>' +
+                "<pre>" + codeHtml + "</pre>" +
+              "</div>" +
+            "</div>" +
+          "</div>" +
+        "</section>" +
+      "</main>" +
+      "<footer>" +
+        '<div class="wrap foot">' +
+          '<p class="copyline">© ' + new Date().getFullYear() + " " + esc(SITE.name) + "</p>" +
+          "<nav>" + docLink + link(SITE.plaza, "模型广场") + contactLink + "</nav>" +
+        "</div>" +
+      "</footer>";
+
+    const copies = { endpoint: endpoint, code: codeText };
+    let copyTimer = 0;
+    let copyButton = null;
+
+    document.getElementById("app").addEventListener("click", async (event) => {
+      const button = event.target.closest("[data-copy]");
+      if (!button) return;
+      const text = copies[button.getAttribute("data-copy")];
+      let ok = false;
+      try {
+        await navigator.clipboard.writeText(text);
+        ok = true;
+      } catch {
+        const area = document.createElement("textarea");
+        area.value = text;
+        area.setAttribute("readonly", "");
+        area.style.position = "fixed";
+        area.style.left = "-9999px";
+        document.body.appendChild(area);
+        area.select();
+        ok = document.execCommand("copy");
+        area.remove();
+      }
+      if (!ok) return;
+      if (copyButton && copyButton !== button) copyButton.textContent = "复制";
+      copyButton = button;
+      button.textContent = "已复制";
+      clearTimeout(copyTimer);
+      copyTimer = setTimeout(() => {
+        button.textContent = "复制";
+        if (copyButton === button) copyButton = null;
+      }, 1600);
+    });
+
+    const narrow = window.matchMedia("(max-width: 859px)");
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const slot = document.getElementById("crystal");
+    let generation = 0;
+    let active = null;
+
+    function showFallback() {
+      slot.classList.remove("is-live");
+    }
+
+    function stopScene() {
+      if (!active) return;
+      const current = active;
+      active = null;
+      cancelAnimationFrame(current.raf);
+      current.observer.disconnect();
+      document.removeEventListener("visibilitychange", current.onVisibility);
+      window.removeEventListener("pointermove", current.onPointer);
+      current.resize.disconnect();
+      const geometries = new Set();
+      const materials = new Set();
+      current.scene.traverse((node) => {
+        if (node.geometry) geometries.add(node.geometry);
+        const material = node.material;
+        if (!material) return;
+        (Array.isArray(material) ? material : [material]).forEach((item) => materials.add(item));
+      });
+      geometries.forEach((item) => item.dispose());
+      materials.forEach((item) => item.dispose());
+      if (current.env) current.env.dispose();
+      current.pmrem.dispose();
+      current.renderer.dispose();
+      current.canvas.remove();
+      showFallback();
+    }
+
+    async function startScene(token) {
+      const THREE = await import("three");
+      const { RoomEnvironment } = await import("three/addons/environments/RoomEnvironment.js");
+      if (token !== generation || narrow.matches || reduced.matches) return;
+
+      const canvas = document.createElement("canvas");
+      canvas.setAttribute("aria-hidden", "true");
+      slot.appendChild(canvas);
+
+      let renderer;
+      try {
+        renderer = new THREE.WebGLRenderer({
+          canvas,
+          alpha: true,
+          antialias: true,
+          powerPreference: "high-performance"
+        });
+      } catch {
+        canvas.remove();
+        showFallback();
+        return;
+      }
+
+      renderer.setClearColor(0x000000, 0);
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.shadowMap.enabled = false;
+
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x07110f, 0.055);
+      const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 40);
+      camera.position.set(0.4, 0.15, 7.4);
+      camera.lookAt(0, 0, 0);
+
+      const pmrem = new THREE.PMREMGenerator(renderer);
+      const env = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+      scene.environment = env;
+      scene.environmentIntensity = 0.7;
+
+      const rig = new THREE.Group();
+      scene.add(rig);
+
+      const coreGeo = new THREE.IcosahedronGeometry(1.12, 1);
+      const core = new THREE.Mesh(coreGeo, new THREE.MeshPhysicalMaterial({
+        color: 0xd7fff6,
+        metalness: 0.04,
+        roughness: 0.16,
+        transmission: 0.84,
+        thickness: 0.7,
+        ior: 1.42,
+        iridescence: 0.18,
+        clearcoat: 0.35,
+        envMapIntensity: 0.8
+      }));
+      core.add(new THREE.LineSegments(
+        new THREE.EdgesGeometry(coreGeo),
+        new THREE.LineBasicMaterial({ color: 0x3ee0c5, transparent: true, opacity: 0.45 })
+      ));
+      rig.add(core);
+
+      const ringMaterial = new THREE.MeshBasicMaterial({
+        color: 0xe7c27a,
+        transparent: true,
+        opacity: 0.42,
+        depthWrite: false
+      });
+      const ringSpecs = [
+        [2.05, "x", 64],
+        [2.45, "y", 18],
+        [2.9, "z", -40]
+      ];
+      const rings = ringSpecs.map(([radius, axis, degrees]) => {
+        const mesh = new THREE.Mesh(
+          new THREE.TorusGeometry(radius, 0.012, 6, 64),
+          ringMaterial
+        );
+        mesh.rotation[axis] = degrees * Math.PI / 180;
+        rig.add(mesh);
+        return mesh;
+      });
+
+      const shardGeo = new THREE.OctahedronGeometry(0.07, 0);
+      const shardMaterial = new THREE.MeshBasicMaterial({
+        color: 0xe7f2ee,
+        transparent: true,
+        opacity: 0.8
+      });
+      for (let index = 0; index < 4; index += 1) {
+        const angle = index / 4 * Math.PI * 2;
+        const shard = new THREE.Mesh(shardGeo, shardMaterial);
+        shard.position.set(Math.cos(angle) * 2.2, Math.sin(angle) * 0.28, Math.sin(angle) * 2.2);
+        rig.add(shard);
+      }
+
+      scene.add(new THREE.AmbientLight(0xd7fff4, 0.32));
+      const key = new THREE.DirectionalLight(0xfff6ea, 2.2);
+      key.position.set(4.5, 6.2, 5);
+      scene.add(key);
+      const rim = new THREE.DirectionalLight(0x145e52, 1.5);
+      rim.position.set(-5, -1.5, -3);
+      scene.add(rim);
+
+      const state = {
+        canvas,
+        renderer,
+        scene,
+        pmrem,
+        env,
+        raf: 0,
+        spin: 0,
+        elapsed: 0,
+        pointer: { x: 0, y: 0 },
+        target: { x: 0, y: 0 },
+        inView: true
+      };
+
+      const fit = () => {
+        const width = slot.clientWidth;
+        const height = slot.clientHeight;
+        if (!width || !height) return;
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+        renderer.setSize(width, height, false);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+      };
+      fit();
+
+      const clock = new THREE.Clock();
+      const resume = () => {
+        if (active !== state || state.raf) return;
+        if (document.visibilityState !== "visible" || !state.inView) return;
+        clock.getDelta();
+        state.raf = requestAnimationFrame(renderFrame);
+      };
+      const renderFrame = () => {
+        state.raf = 0;
+        if (document.visibilityState !== "visible" || !state.inView) return;
+        const dt = Math.min(clock.getDelta(), 0.05);
+        const frames = dt * 60;
+        state.spin += 0.0016 * frames;
+        state.elapsed += dt;
+        state.pointer.x += (state.target.x - state.pointer.x) * 0.04;
+        state.pointer.y += (state.target.y - state.pointer.y) * 0.04;
+        rig.rotation.y = state.spin + state.pointer.y;
+        rig.rotation.x = state.pointer.x;
+        core.rotation.x = Math.sin(state.elapsed * 0.32) * 0.06;
+        rings[0].rotation.z += 0.0024 * frames;
+        rings[1].rotation.x += -0.0018 * frames;
+        renderer.render(scene, camera);
+        state.raf = requestAnimationFrame(renderFrame);
+      };
+
+      state.onPointer = (event) => {
+        const nx = event.clientX / window.innerWidth * 2 - 1;
+        const ny = event.clientY / window.innerHeight * 2 - 1;
+        state.target.y = Math.max(-0.1, Math.min(0.1, nx * 0.1));
+        state.target.x = Math.max(-0.1, Math.min(0.1, -ny * 0.1));
+      };
+      state.onVisibility = () => {
+        if (document.visibilityState !== "visible") return;
+        resume();
+      };
+      state.observer = new IntersectionObserver((entries) => {
+        state.inView = entries[0].isIntersecting;
+        if (state.inView) resume();
+      });
+      state.resize = new ResizeObserver(fit);
+      window.addEventListener("pointermove", state.onPointer);
+      document.addEventListener("visibilitychange", state.onVisibility);
+      state.observer.observe(slot);
+      state.resize.observe(slot);
+      active = state;
+      if (token !== generation) {
+        stopScene();
+        return;
+      }
+      slot.classList.add("is-live");
+      state.raf = requestAnimationFrame(renderFrame);
+    }
+
+    async function syncScene() {
+      const token = ++generation;
+      stopScene();
+      if (narrow.matches || reduced.matches) {
+        showFallback();
+        return;
+      }
+      try {
+        await startScene(token);
+      } catch {
+        if (token === generation) {
+          stopScene();
+          showFallback();
+        }
+      }
+    }
+
+    narrow.addEventListener("change", syncScene);
+    reduced.addEventListener("change", syncScene);
+    syncScene();
+  </script>
+</body>
+</html>
