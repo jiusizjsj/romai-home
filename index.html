@@ -2,423 +2,523 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#FAFAF9" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0E0E10" media="(prefers-color-scheme: dark)">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
   <title></title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,450&family=Noto+Sans+SC:wght@400;500&family=Outfit:wght@400;500&display=swap">
   <style>
     :root {
-      color-scheme: light dark;
-      --space-1: 4px;
-      --space-2: 8px;
-      --space-3: 12px;
-      --space-4: 16px;
-      --space-5: 20px;
-      --space-6: 24px;
-      --space-8: 32px;
-      --space-10: 40px;
-      --space-12: 48px;
-      --space-16: 64px;
-      --space-24: 96px;
-      --gutter: clamp(16px, 4vw, 48px);
-      --section-gap: clamp(48px, 8vw, 96px);
-      --content-max: 1120px;
-      --reading-max: 68ch;
-      --font-sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", ui-sans-serif, system-ui, sans-serif;
-      --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-      --text-xs: 0.75rem;
-      --text-sm: 0.875rem;
-      --text-base: 1rem;
-      --text-md: 1.125rem;
-      --text-lg: 1.25rem;
-      --text-2xl: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem);
-      --text-4xl: clamp(2.5rem, 1.6rem + 3.2vw, 4rem);
-      --leading-tight: 1.15;
-      --leading-normal: 1.5;
-      --leading-relaxed: 1.65;
-      --tracking-display: -0.02em;
-      --weight-regular: 400;
-      --weight-medium: 500;
-      --weight-semibold: 600;
-      --radius-sm: 6px;
-      --radius-md: 10px;
-      --radius-full: 9999px;
-      --border-width: 1px;
-      --duration-fast: 140ms;
-      --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
-      --z-sticky: 100;
-      --bg: #FAFAF9;
-      --surface: #FFFFFF;
-      --surface-sunken: #F3F3F1;
-      --border: #E3E3DF;
-      --border-strong: #86867F;
-      --text: #1A1A18;
-      --text-muted: #55554F;
-      --accent: #0F6E73;
-      --accent-hover: #0B5A5E;
-      --accent-fg: #FFFFFF;
-      --accent-text: #0F6E73;
-      --focus-ring: #0F6E73;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #0E0E10;
-        --surface: #161619;
-        --surface-sunken: #1D1D21;
-        --border: #2A2A30;
-        --border-strong: #6E6E79;
-        --text: #EDEDEF;
-        --text-muted: #A3A3AD;
-        --accent: #4FC7CC;
-        --accent-hover: #7DDBDE;
-        --accent-fg: #0E0E10;
-        --accent-text: #4FC7CC;
-        --focus-ring: #4FC7CC;
-      }
+      --bg: #07110f;
+      --raise: #0e1714;
+      --raise-2: #13201c;
+      --ink: #e7f2ee;
+      --muted: #8aa39a;
+      --line: rgba(231, 242, 238, 0.10);
+      --line-strong: rgba(231, 242, 238, 0.28);
+      --accent: #3ee0c5;
+      --warm: #e7c27a;
+      --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+      --shadow: 0 24px 48px rgba(0, 0, 0, 0.28);
+      --sans: Outfit, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      --body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      --display: Newsreader, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", serif;
+      --mono: "IBM Plex Mono", ui-monospace, monospace;
     }
 
     * { box-sizing: border-box; }
 
-    html, body { margin: 0; background: var(--bg); color: var(--text); }
+    html, body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+    }
 
     body {
-      font-family: var(--font-sans);
-      font-size: var(--text-base);
-      font-weight: var(--weight-regular);
-      line-height: var(--leading-normal);
-      text-rendering: optimizeLegibility;
+      font-family: var(--body);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.7;
+      -webkit-text-size-adjust: 100%;
     }
 
     :focus { outline: none; }
     :focus-visible {
-      outline: 2px solid var(--focus-ring);
-      outline-offset: 2px;
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
     }
 
-    .skip {
-      position: absolute;
-      left: var(--space-4);
-      top: var(--space-4);
-      transform: translateY(-160%);
-      background: var(--accent);
-      color: var(--accent-fg);
-      padding: var(--space-2) var(--space-4);
-      border-radius: var(--radius-sm);
-      text-decoration: none;
-      z-index: 10;
-    }
-    .skip:focus { transform: none; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 4px; }
 
     .wrap {
-      width: min(var(--content-max), 100%);
+      width: min(1120px, calc(100% - 48px));
       margin: 0 auto;
-      padding-left: var(--gutter);
-      padding-right: var(--gutter);
+    }
+
+    @media (min-width: 1200px) {
+      .wrap { width: min(1120px, calc(100% - 80px)); }
     }
 
     header {
       position: sticky;
       top: 0;
-      z-index: var(--z-sticky);
-      background: var(--bg);
-      border-bottom: var(--border-width) solid var(--border);
-      padding-top: env(safe-area-inset-top);
+      z-index: 5;
+      height: 64px;
+      background: rgba(7, 17, 15, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
     }
 
     .bar {
-      min-height: 64px;
+      position: relative;
+      height: 64px;
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: var(--space-3) var(--space-4);
-      padding-top: var(--space-2);
-      padding-bottom: var(--space-2);
+      gap: 16px;
     }
 
     .brand {
-      color: var(--text);
-      font-size: var(--text-md);
-      font-weight: var(--weight-semibold);
-      letter-spacing: -0.01em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1;
       text-decoration: none;
     }
 
-    .site-nav {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: var(--space-2) var(--space-5);
+    .brand:hover { color: var(--ink); text-decoration: none; }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex: none;
     }
 
-    .site-nav a {
-      color: var(--text);
-      font-size: var(--text-sm);
-      font-weight: var(--weight-medium);
-      text-decoration: none;
+    .nav-center {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      gap: 32px;
     }
 
-    .site-nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+    .nav-center a {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1;
+    }
 
-    .account {
+    .nav-right {
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
-      gap: var(--space-2);
-      margin-left: auto;
+      gap: 8px;
+      flex: none;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 44px;
-      padding: 0 var(--space-4);
-      border: var(--border-width) solid transparent;
-      border-radius: var(--radius-sm);
+      min-height: 40px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid transparent;
       background: transparent;
-      color: var(--text);
-      font: inherit;
-      font-size: var(--text-sm);
-      font-weight: var(--weight-medium);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
       line-height: 1;
       text-decoration: none;
       cursor: pointer;
-      transition: background-color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+      transition: border-color 180ms var(--ease);
     }
 
     .btn:hover { text-decoration: none; }
-    .btn:active { transform: translateY(1px); }
 
-    .btn-primary { background: var(--accent); color: var(--accent-fg); }
-    .btn-primary:hover { background: var(--accent-hover); }
-
-    .btn-secondary {
-      background: var(--surface);
-      border-color: var(--border-strong);
+    .btn-primary {
+      background: var(--ink);
+      color: var(--bg);
     }
-    .btn-secondary:hover { background: var(--surface-sunken); }
 
-    main { padding-bottom: var(--space-16); }
+    .btn-secondary { border-color: var(--line); }
+    .btn-secondary:hover,
+    .btn-text:hover { border-color: var(--line-strong); }
 
-    .hero { padding-top: var(--space-16); }
+    .btn-copy { min-width: 72px; }
 
-    h1, h2, h3 {
-      text-wrap: balance;
-      letter-spacing: var(--tracking-display);
-      line-height: var(--leading-tight);
-      font-weight: var(--weight-semibold);
+    .eyebrow {
+      margin: 0 0 16px;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      line-height: 1;
+      color: var(--muted);
     }
+
+    h1, h2, h3 { margin: 0; font-weight: 500; color: var(--ink); }
 
     h1 {
-      margin: 0;
-      max-width: 12em;
-      font-size: var(--text-4xl);
+      max-width: 7.2em;
+      font-family: var(--display);
+      font-weight: 450;
+      font-size: clamp(40px, 5.6vw, 72px);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
     }
 
     h2 {
-      margin: 0 0 var(--space-6);
-      font-size: var(--text-2xl);
-      letter-spacing: -0.01em;
+      font-family: var(--sans);
+      font-size: clamp(28px, 3vw, 40px);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
     }
 
-    h3 { margin: 0; font-size: var(--text-lg); letter-spacing: -0.01em; }
-
-    p { text-wrap: pretty; margin: 0; }
+    h3 {
+      font-family: var(--sans);
+      font-size: 20px;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
 
     .lede {
-      max-width: var(--reading-max);
-      margin-top: var(--space-6);
-      font-size: var(--text-md);
-      line-height: var(--leading-relaxed);
+      margin: 24px 0 0;
+      max-width: 38em;
+      color: var(--ink);
+    }
+
+    .note {
+      margin: 8px 0 0;
+      max-width: 38em;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background-image:
+        linear-gradient(rgba(231, 242, 238, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(231, 242, 238, 0.04) 1px, transparent 1px);
+      background-size: 64px 64px;
+    }
+
+    .hero-inner {
+      position: relative;
+      width: min(1120px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 32px 0 clamp(72px, 9vw, 112px);
+    }
+
+    @media (min-width: 1200px) {
+      .hero-inner { width: min(1120px, calc(100% - 80px)); }
+    }
+
+    @media (min-width: 860px) {
+      .hero { min-height: clamp(720px, calc(100vh - 64px), 920px); }
+      .hero-inner {
+        min-height: clamp(720px, calc(100vh - 64px), 920px);
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .copy { max-width: 520px; }
+
+    .copy-text,
+    .actions,
+    .endpoint { position: relative; z-index: 1; }
+
+    .copy-text {
+      background: linear-gradient(90deg, #07110f 0%, rgba(7, 17, 15, 0.96) 78%, rgba(7, 17, 15, 0) 100%);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 32px;
     }
 
     .endpoint {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: var(--space-3) var(--space-4);
+      gap: 12px;
       max-width: 100%;
-      margin-top: var(--space-8);
-      padding: var(--space-4);
-      background: var(--surface-sunken);
-      border-radius: var(--radius-md);
+      margin-top: 24px;
+      padding: 8px 8px 8px 16px;
+      background: var(--raise-2);
+      border: 1px solid var(--line);
+      border-radius: 14px;
     }
 
-    .method, .url, pre, .code-label {
-      font-family: var(--font-mono);
+    .method, .url, code, pre, .num, .code-label {
+      font-family: var(--mono);
     }
 
     .method {
       flex: none;
-      font-size: var(--text-sm);
-      line-height: 1.4;
-      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--muted);
     }
 
     .url {
       min-width: 0;
-      flex: 1 1 16rem;
-      font-size: clamp(1.05rem, 0.85rem + 1vw, 1.75rem);
-      font-weight: var(--weight-medium);
-      line-height: 1.35;
-      letter-spacing: -0.02em;
+      flex: 1 1 12rem;
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--warm);
       overflow-wrap: anywhere;
     }
 
-    .block { padding-top: var(--section-gap); }
-    #models, #access { scroll-margin-top: 88px; }
+    .crystal { pointer-events: none; }
 
-    .note {
-      max-width: var(--reading-max);
-      margin: calc(var(--space-2) * -1) 0 var(--space-6);
-      color: var(--text-muted);
-      font-size: var(--text-sm);
-      line-height: var(--leading-relaxed);
+    .crystal svg {
+      display: block;
+      width: 240px;
+      height: 240px;
     }
 
-    .models {
-      list-style: none;
+    .crystal canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .crystal.is-live svg { display: none; }
+
+    @media (min-width: 860px) {
+      .crystal {
+        position: absolute;
+        top: 50%;
+        right: -6%;
+        width: min(640px, 52vw);
+        height: min(640px, calc(100vh - 160px));
+        transform: translateY(-50%);
+      }
+
+      .crystal svg {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    @media (max-width: 859px) {
+      .nav-center { display: none; }
+      .copy { max-width: none; }
+      .copy-text,
+      .actions,
+      .endpoint { background: none; }
+      .endpoint { background: var(--raise-2); }
+      .hero-inner { width: min(100% - 48px, 1120px); }
+      .btn { padding: 8px 12px; }
+      .url { flex-basis: 100%; }
+      .crystal {
+        height: 220px;
+        margin: 24px 0;
+        display: grid;
+        place-items: center;
+      }
+      .crystal svg { width: 200px; height: 200px; }
+    }
+
+    .block { padding: clamp(72px, 9vw, 112px) 0; }
+    #models, #access { scroll-margin-top: 80px; }
+    .head { margin-bottom: 32px; }
+
+    .grid { display: grid; gap: 16px; min-width: 0; }
+    .models { grid-template-columns: 1fr; }
+    .caps { grid-template-columns: 1fr; }
+    .access { grid-template-columns: 1fr; align-items: start; }
+
+    @media (min-width: 640px) {
+      .models { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (min-width: 860px) {
+      .caps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .access { grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr); }
+    }
+
+    @media (min-width: 1080px) {
+      .models { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+
+    .card {
+      background: var(--raise);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px;
+      transition: border-color 180ms var(--ease);
+    }
+
+    .card:hover { border-color: var(--line-strong); }
+
+    .model {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .vendor {
       margin: 0;
-      padding: 0;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--muted);
     }
 
-    .models li {
-      display: grid;
-      grid-template-columns: minmax(7rem, 0.7fr) minmax(7rem, 0.7fr) minmax(0, 1.2fr);
-      gap: var(--space-2) var(--space-6);
-      align-items: baseline;
-      padding: var(--space-4) 0;
-      border-top: var(--border-width) solid var(--border);
-    }
+    .warm { color: var(--warm); }
 
-    .models li:last-child { border-bottom: var(--border-width) solid var(--border); }
-
-    .vendor, .tags {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: var(--text-sm);
-      line-height: var(--leading-relaxed);
-    }
-
-    .tags { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
 
     .tag {
-      padding: var(--space-1) var(--space-2);
-      border: var(--border-width) solid var(--border);
-      border-radius: var(--radius-full);
-      color: var(--text-muted);
-      font-size: var(--text-xs);
+      padding: 4px 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 12px;
       line-height: 1.4;
+      color: var(--muted);
     }
 
-    .facts {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: var(--space-8) var(--space-6);
+    .price {
+      margin: auto 0 0;
+      padding-top: 8px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--warm);
     }
 
-    .facts h2 {
-      margin: 0;
-      font-size: var(--text-lg);
+    .num {
+      display: block;
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--muted);
     }
 
-    .facts p {
-      max-width: 28em;
-      margin-top: var(--space-2);
-      line-height: var(--leading-relaxed);
-    }
+    .card h3 { margin-top: 12px; }
+    .card p { margin: 8px 0 0; }
+    .steps { display: grid; gap: 16px; }
+    .step p { margin-top: 12px; }
 
-    .access {
-      display: grid;
-      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-      gap: var(--space-8);
-      align-items: start;
-    }
-
-    .steps {
-      margin: 0;
-      padding: 0 0 0 1.25rem;
-      display: grid;
-      gap: var(--space-4);
-    }
-
-    .steps li { padding-left: var(--space-2); line-height: var(--leading-relaxed); }
-    .steps a { color: var(--accent-text); }
-    .steps a:hover { text-underline-offset: 3px; }
-
-    code.addr {
-      font-family: var(--font-mono);
-      font-size: 0.92em;
+    code.inline {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--warm);
       overflow-wrap: anywhere;
+    }
+
+    .code, .steps, .access {
+      min-width: 0;
     }
 
     .code {
-      background: var(--surface-sunken);
-      border-radius: var(--radius-md);
-      min-width: 0;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
     }
 
     .code-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: var(--space-2);
-      padding: var(--space-2) var(--space-2) 0 var(--space-4);
+      gap: 8px;
+      padding: 8px 8px 8px 22px;
+      background: var(--raise-2);
     }
 
     .code-label {
-      font-size: var(--text-sm);
-      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--muted);
     }
 
     pre {
       margin: 0;
-      padding: var(--space-3) var(--space-4) var(--space-4);
+      padding: 22px;
+      max-width: 100%;
       overflow-x: auto;
-      font-size: var(--text-sm);
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 13px;
       line-height: 1.65;
-      white-space: pre;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
     }
 
     footer {
-      border-top: var(--border-width) solid var(--border);
-      padding: var(--space-6) 0 calc(var(--space-6) + env(safe-area-inset-bottom));
+      border-top: 1px solid var(--line);
+      padding: 28px 0;
     }
 
     .foot {
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: var(--space-4);
+      gap: 16px;
+      flex-wrap: wrap;
     }
 
     .copyline {
       margin: 0;
-      color: var(--text-muted);
-      font-size: var(--text-sm);
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
     }
 
-    .foot nav { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); }
-    .foot a { color: var(--accent-text); font-size: var(--text-sm); font-weight: var(--weight-medium); }
+    .foot nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
 
-    @media (max-width: 800px) {
-      .facts, .access { grid-template-columns: 1fr; }
-      .models li { grid-template-columns: 1fr; gap: var(--space-1); }
-      .hero { padding-top: var(--space-10); }
+    .foot a {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .reveal {
+      animation: rise 720ms var(--ease) both;
+      animation-delay: calc(var(--d, 0) * 50ms);
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: none; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .btn { transition: none; }
-      .btn:active { transform: none; }
+      .reveal { animation: none; opacity: 1; transform: none; }
     }
   </style>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
 </head>
 <body>
   <div id="app"></div>
@@ -442,117 +542,114 @@
     };
 
     const endpointPath = SITE.apiBase + "/chat/completions";
-    const endpointCopy = "POST " + endpointPath;
     const codeText = [
       "from openai import OpenAI",
-      "",
-      "client = OpenAI(",
-      '    base_url="' + SITE.apiBase + '",',
-      '    api_key="控制台创建的密钥"',
-      ")",
-      "reply = client.chat.completions.create(",
-      '    model="控制台中的模型名",',
-      '    messages=[{"role": "user", "content": "你好"}]',
-      ")"
+      'client = OpenAI(base_url="' + SITE.apiBase + '", api_key="控制台创建的密钥")',
+      'r = client.chat.completions.create(model="控制台中的模型名", messages=[{"role": "user", "content": "你好"}])'
     ].join("\n");
 
     const esc = (value) => String(value).replace(/[&<>"']/g, (ch) => ({
       "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
     })[ch]);
 
+    const link = (href, label, className, blank) => {
+      const cls = className ? ' class="' + className + '"' : "";
+      const ext = blank ? ' target="_blank" rel="noopener noreferrer"' : "";
+      return '<a href="' + esc(href) + '"' + cls + ext + ">" + label + "</a>";
+    };
+
     document.title = SITE.name;
-    const description = document.createElement("meta");
-    description.name = "description";
-    description.content = "已接入的 Claude、GPT、Gemini 等模型，用同一把密钥、同一个地址调用。按用量计费。";
-    document.head.appendChild(description);
+    const docLink = SITE.docUrl ? link(SITE.docUrl, "文档", "", true) : "";
+    const docButton = SITE.docUrl ? link(SITE.docUrl, "查看文档", "btn btn-secondary", true) : "";
+    const contactLink = SITE.contact ? link("mailto:" + SITE.contact, "联系") : "";
 
-    const link = (href, label, className) =>
-      '<a href="' + esc(href) + '"' + (className ? ' class="' + className + '"' : "") + ">" + label + "</a>";
+    const cards = SITE.models.map((model, index) => {
+      const vendorClass = model.vendor.indexOf("以控制台为准") >= 0 ? "vendor warm" : "vendor";
+      const tags = model.tags.map((tag) => '<span class="tag">' + esc(tag) + "</span>").join("");
+      return '<article class="card model reveal" style="--d:' + (6 + index) + '">' +
+        "<h3>" + esc(model.name) + "</h3>" +
+        '<p class="' + vendorClass + '">' + esc(model.vendor) + "</p>" +
+        '<div class="tags">' + tags + "</div>" +
+        '<p class="price">上下文与价格以控制台为准</p></article>';
+    }).join("");
 
-    const doc = SITE.docUrl
-      ? '<a href="' + esc(SITE.docUrl) + '" target="_blank" rel="noopener noreferrer">文档<span class="sr">（新窗口）</span></a>'
-      : "";
-    const contact = SITE.contact
-      ? link("mailto:" + SITE.contact, "联系")
-      : "";
+    const svg = '<svg viewBox="0 0 240 240" aria-hidden="true">' +
+      '<g fill="none" stroke="#3ee0c5" stroke-opacity="0.7" stroke-width="1.2" stroke-linejoin="round">' +
+      '<line x1="98.3" y1="63.9" x2="185.7" y2="48.8"/><line x1="98.3" y1="63.9" x2="159.6" y2="117.1"/>' +
+      '<line x1="98.3" y1="63.9" x2="78.4" y2="16"/><line x1="98.3" y1="63.9" x2="16" y2="97.2"/>' +
+      '<line x1="98.3" y1="63.9" x2="81.1" y2="138.8"/><line x1="185.7" y1="48.8" x2="159.6" y2="117.1"/>' +
+      '<line x1="185.7" y1="48.8" x2="78.4" y2="16"/><line x1="185.7" y1="48.8" x2="193.4" y2="80.3"/>' +
+      '<line x1="185.7" y1="48.8" x2="224" y2="146.9"/><line x1="42.4" y1="195.8" x2="146.1" y2="224"/>' +
+      '<line x1="42.4" y1="195.8" x2="140.7" y2="193.2"/><line x1="42.4" y1="195.8" x2="18.3" y2="129.4"/>' +
+      '<line x1="42.4" y1="195.8" x2="16" y2="97.2"/><line x1="42.4" y1="195.8" x2="81.1" y2="138.8"/>' +
+      '<line x1="146.1" y1="224" x2="140.7" y2="193.2"/><line x1="146.1" y1="224" x2="18.3" y2="129.4"/>' +
+      '<line x1="146.1" y1="224" x2="193.4" y2="80.3"/><line x1="146.1" y1="224" x2="224" y2="146.9"/>' +
+      '<line x1="140.7" y1="193.2" x2="159.6" y2="117.1"/><line x1="140.7" y1="193.2" x2="224" y2="146.9"/>' +
+      '<line x1="140.7" y1="193.2" x2="81.1" y2="138.8"/><line x1="159.6" y1="117.1" x2="224" y2="146.9"/>' +
+      '<line x1="159.6" y1="117.1" x2="81.1" y2="138.8"/><line x1="18.3" y1="129.4" x2="78.4" y2="16"/>' +
+      '<line x1="18.3" y1="129.4" x2="193.4" y2="80.3"/><line x1="18.3" y1="129.4" x2="16" y2="97.2"/>' +
+      '<line x1="78.4" y1="16" x2="193.4" y2="80.3"/><line x1="78.4" y1="16" x2="16" y2="97.2"/>' +
+      '<line x1="193.4" y1="80.3" x2="224" y2="146.9"/><line x1="16" y1="97.2" x2="81.1" y2="138.8"/>' +
+      "</g></svg>";
 
-    const rows = SITE.models.map((model) =>
-      "<li><h3>" + esc(model.name) + "</h3><p class=\"vendor\">" + esc(model.vendor) +
-      "</p><p class=\"tags\">" + model.tags.map((tag) => "<span class=\"tag\">" + esc(tag) + "</span>").join("") +
-      "</p></li>"
-    ).join("");
+    const codeHtml = "from openai import OpenAI\n" +
+      'client = OpenAI(base_url=<span class="warm">"' + esc(SITE.apiBase) + '"</span>, api_key="控制台创建的密钥")\n' +
+      'r = client.chat.completions.create(model="控制台中的模型名", messages=[{"role": "user", "content": "你好"}])';
 
     document.getElementById("app").innerHTML =
-      '<a class="skip" href="#main">跳到内容</a>' +
       "<header><div class=\"wrap bar\">" +
-        link(SITE.apiOrigin, esc(SITE.name), "brand") +
-        '<nav class="site-nav" aria-label="页面">' +
-          '<a href="#models">模型</a><a href="#access">接入</a>' + doc +
-        "</nav>" +
-        '<div class="account">' +
-          link(SITE.login, "登录", "btn") +
+        '<a class="brand" href="' + esc(SITE.apiOrigin) + '"><span class="dot" aria-hidden="true"></span><span>' + esc(SITE.name) + "</span></a>" +
+        '<nav class="nav-center" aria-label="页面"><a href="#models">模型</a><a href="#access">接入</a>' + docLink + "</nav>" +
+        '<div class="nav-right">' +
+          link(SITE.login, "登录", "btn btn-text") +
           link(SITE.console, "进入控制台", "btn btn-primary") +
+        "</div></div></header>" +
+      "<main><section class=\"hero\"><div class=\"hero-inner\"><div class=\"copy\">" +
+        '<div class="copy-text">' +
+          '<p class="eyebrow reveal" style="--d:0">Model Gateway</p>' +
+          '<h1 class="reveal" style="--d:1">一个密钥，调用多个模型</h1>' +
+          '<p class="lede reveal" style="--d:2">已接入的 Claude、GPT、Gemini 等模型，用同一把密钥、同一个地址调用。按用量计费。</p>' +
         "</div>" +
-      "</div></header>" +
-      '<main id="main">' +
-        '<section class="hero"><div class="wrap">' +
-          "<h1>一个密钥，<br>调用多个模型</h1>" +
-          '<div class="endpoint">' +
-            '<span class="method">POST</span>' +
-            '<code class="url">' + esc(endpointPath) + "</code>" +
-            '<button class="btn btn-secondary" type="button" data-copy="endpoint">复制</button>' +
-          "</div>" +
-          '<p class="lede">已接入的 Claude、GPT、Gemini 等模型，用同一把密钥、同一个地址调用。按用量计费。</p>' +
-        "</div></section>" +
-        '<section class="block" id="models"><div class="wrap">' +
-          "<h2>模型</h2>" +
-          '<p class="note">能力与价格以控制台列表为准。</p>' +
-          '<ul class="models">' + rows + "</ul>" +
-        "</div></section>" +
-        '<section class="block"><div class="wrap facts">' +
-          "<div><h2>一键接入</h2><p>一把密钥调用已接入模型，客户端只改地址和密钥。</p></div>" +
-          "<div><h2>调度与会话</h2><p>多个上游账号分担请求，会话尽量落在同一上游。</p></div>" +
-          "<div><h2>按量与配额</h2><p>按使用量计费，可查看明细，也可给密钥设置上限。</p></div>" +
-        "</div></section>" +
-        '<section class="block" id="access"><div class="wrap">' +
-          "<h2>替换地址即可</h2>" +
-          '<div class="access">' +
-            "<ol class=\"steps\">" +
-              "<li>" + link(SITE.register, "注册账号") + "</li>" +
-              "<li>在" + link(SITE.console, "控制台") + "创建密钥</li>" +
-              "<li>在原来的 OpenAI SDK 里把 base_url 换成 <code class=\"addr\">" + esc(SITE.apiBase) + "</code></li>" +
-            "</ol>" +
-            '<div class="code">' +
-              '<div class="code-bar"><span class="code-label">Python</span>' +
-              '<button class="btn btn-secondary" type="button" data-copy="code">复制</button></div>' +
-              "<pre>" + esc(codeText) + "</pre>" +
-            "</div>" +
-          "</div>" +
-        "</div></section>" +
-      "</main>" +
-      "<footer><div class=\"wrap foot\">" +
-        '<p class="copyline">© ' + new Date().getFullYear() + " " + esc(SITE.name) + "</p>" +
-        "<nav>" + doc + link(SITE.plaza, "模型广场") + contact + "</nav>" +
-      "</div></footer>";
+        '<div class="crystal" id="crystal">' + svg + "</div>" +
+        '<div class="actions reveal" style="--d:3">' +
+          link(SITE.console, "进入控制台", "btn btn-primary") + docButton +
+        "</div>" +
+        '<div class="endpoint reveal" style="--d:4"><span class="method">POST</span><code class="url">' + endpointPath.split("/").map(esc).join("/<wbr>") + '</code><button class="btn btn-secondary btn-copy" type="button" data-copy="endpoint">复制</button></div>' +
+      "</div></div></section>" +
+      '<section class="block" id="models"><div class="wrap">' +
+        '<div class="head reveal" style="--d:5"><h2>模型</h2><p class="note">能力与价格以控制台列表为准。</p></div>' +
+        '<div class="grid models">' + cards + "</div></div></section>" +
+      '<section class="block"><div class="wrap grid caps">' +
+        '<article class="card reveal" style="--d:10"><span class="num">01</span><h3>一键接入</h3><p>一把密钥调用已接入模型，客户端只改地址和密钥。</p></article>' +
+        '<article class="card reveal" style="--d:11"><span class="num">02</span><h3>调度与会话</h3><p>多个上游账号分担请求，会话尽量落在同一上游。</p></article>' +
+        '<article class="card reveal" style="--d:12"><span class="num">03</span><h3>按量与配额</h3><p>按使用量计费，可查看明细，也可给密钥设置上限。</p></article>' +
+      "</div></section>" +
+      '<section class="block" id="access"><div class="wrap">' +
+        '<div class="head reveal" style="--d:13"><h2>替换地址即可</h2></div>' +
+        '<div class="grid access"><div class="steps">' +
+          '<article class="card step reveal" style="--d:14"><span class="num">01</span><p>' + link(SITE.register, "注册账号") + "</p></article>" +
+          '<article class="card step reveal" style="--d:15"><span class="num">02</span><p>在' + link(SITE.console, "控制台") + "创建密钥</p></article>" +
+          '<article class="card step reveal" style="--d:16"><span class="num">03</span><p>在原来的 OpenAI SDK 里把 base_url 换成 <code class="inline">' + esc(SITE.apiBase) + "</code></p></article>" +
+        "</div>" +
+        '<div class="code reveal" style="--d:17"><div class="code-bar"><span class="code-label">Python</span><button class="btn btn-secondary btn-copy" type="button" data-copy="code">复制</button></div><pre>' + codeHtml + "</pre></div>" +
+      "</div></div></section></main>" +
+      '<footer><div class="wrap foot"><p class="copyline">© ' + new Date().getFullYear() + " " + esc(SITE.name) + "</p><nav>" +
+        docLink + link(SITE.plaza, "模型广场") + contactLink +
+      "</nav></div></footer>";
 
-    const style = document.createElement("style");
-    style.textContent = ".sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}";
-    document.head.appendChild(style);
-
-    const copies = { endpoint: endpointCopy, code: codeText };
+    const copies = { endpoint: "POST " + endpointPath, code: codeText };
     let timer = 0;
     let current = null;
     document.getElementById("app").addEventListener("click", async (event) => {
       const button = event.target.closest("[data-copy]");
       if (!button) return;
-      const text = copies[button.getAttribute("data-copy")];
       let ok = false;
       try {
-        await navigator.clipboard.writeText(text);
+        await navigator.clipboard.writeText(copies[button.getAttribute("data-copy")]);
         ok = true;
       } catch {
         const area = document.createElement("textarea");
-        area.value = text;
+        area.value = copies[button.getAttribute("data-copy")];
         area.style.position = "fixed";
         area.style.left = "-9999px";
         document.body.appendChild(area);
@@ -570,6 +667,205 @@
         if (current === button) current = null;
       }, 1600);
     });
+
+    const narrow = matchMedia("(max-width: 859px)");
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+    const slot = document.getElementById("crystal");
+    let generation = 0;
+    let active = null;
+
+    function stopScene() {
+      if (!active) return;
+      const current = active;
+      active = null;
+      cancelAnimationFrame(current.raf);
+      current.observer.disconnect();
+      current.resize.disconnect();
+      document.removeEventListener("visibilitychange", current.onVisibility);
+      window.removeEventListener("pointermove", current.onPointer);
+      const geometries = new Set();
+      const materials = new Set();
+      current.scene.traverse((node) => {
+        if (node.geometry) geometries.add(node.geometry);
+        if (!node.material) return;
+        (Array.isArray(node.material) ? node.material : [node.material]).forEach((item) => materials.add(item));
+      });
+      geometries.forEach((item) => item.dispose());
+      materials.forEach((item) => item.dispose());
+      current.env.dispose();
+      current.pmrem.dispose();
+      current.renderer.dispose();
+      current.canvas.remove();
+      slot.classList.remove("is-live");
+    }
+
+    async function startScene(token) {
+      const THREE = await import("three");
+      const { RoomEnvironment } = await import("three/addons/environments/RoomEnvironment.js");
+      if (token !== generation || narrow.matches || reduced.matches) return;
+
+      const canvas = document.createElement("canvas");
+      canvas.setAttribute("aria-hidden", "true");
+      slot.appendChild(canvas);
+      let renderer;
+      try {
+        renderer = new THREE.WebGLRenderer({
+          canvas,
+          alpha: true,
+          antialias: true,
+          powerPreference: "high-performance"
+        });
+      } catch {
+        canvas.remove();
+        return;
+      }
+      renderer.setClearColor(0x000000, 0);
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.shadowMap.enabled = false;
+
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x07110f, 0.055);
+      const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 40);
+      camera.position.set(0.4, 0.15, 7.4);
+      camera.lookAt(0, 0, 0);
+
+      const pmrem = new THREE.PMREMGenerator(renderer);
+      const env = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+      scene.environment = env;
+      scene.environmentIntensity = 0.7;
+
+      const rig = new THREE.Group();
+      scene.add(rig);
+      const coreGeo = new THREE.IcosahedronGeometry(1.12, 1);
+      const core = new THREE.Mesh(coreGeo, new THREE.MeshPhysicalMaterial({
+        color: 0xd7fff6,
+        metalness: 0.04,
+        roughness: 0.16,
+        transmission: 0.84,
+        thickness: 0.7,
+        ior: 1.42,
+        iridescence: 0.18,
+        clearcoat: 0.35,
+        envMapIntensity: 0.8
+      }));
+      core.add(new THREE.LineSegments(
+        new THREE.EdgesGeometry(coreGeo),
+        new THREE.LineBasicMaterial({ color: 0x3ee0c5, transparent: true, opacity: 0.45 })
+      ));
+      rig.add(core);
+
+      const ringMaterial = new THREE.MeshBasicMaterial({
+        color: 0xe7c27a,
+        transparent: true,
+        opacity: 0.42,
+        depthWrite: false
+      });
+      const rings = [
+        [2.05, "x", 64],
+        [2.45, "y", 18],
+        [2.9, "z", -40]
+      ].map(([radius, axis, degrees]) => {
+        const mesh = new THREE.Mesh(new THREE.TorusGeometry(radius, 0.012, 6, 64), ringMaterial);
+        mesh.rotation[axis] = degrees * Math.PI / 180;
+        rig.add(mesh);
+        return mesh;
+      });
+
+      const shardGeo = new THREE.OctahedronGeometry(0.07, 0);
+      const shardMaterial = new THREE.MeshBasicMaterial({ color: 0xe7f2ee, transparent: true, opacity: 0.8 });
+      for (let index = 0; index < 4; index += 1) {
+        const angle = index / 4 * Math.PI * 2;
+        const shard = new THREE.Mesh(shardGeo, shardMaterial);
+        shard.position.set(Math.cos(angle) * 2.2, Math.sin(angle) * 0.28, Math.sin(angle) * 2.2);
+        rig.add(shard);
+      }
+
+      scene.add(new THREE.AmbientLight(0xd7fff4, 0.32));
+      const key = new THREE.DirectionalLight(0xfff6ea, 2.2);
+      key.position.set(4.5, 6.2, 5);
+      scene.add(key);
+      const rim = new THREE.DirectionalLight(0x145e52, 1.5);
+      rim.position.set(-5, -1.5, -3);
+      scene.add(rim);
+
+      const state = {
+        canvas, renderer, scene, pmrem, env,
+        raf: 0, spin: 0, elapsed: 0, inView: true,
+        pointer: { x: 0, y: 0 }, target: { x: 0, y: 0 }
+      };
+      const fit = () => {
+        const width = slot.clientWidth;
+        const height = slot.clientHeight;
+        if (!width || !height) return;
+        renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.5));
+        renderer.setSize(width, height, false);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+      };
+      fit();
+      const clock = new THREE.Clock();
+      const resume = () => {
+        if (active !== state || state.raf) return;
+        if (document.visibilityState !== "visible" || !state.inView) return;
+        clock.getDelta();
+        state.raf = requestAnimationFrame(renderFrame);
+      };
+      const renderFrame = () => {
+        state.raf = 0;
+        if (document.visibilityState !== "visible" || !state.inView) return;
+        const dt = Math.min(clock.getDelta(), 0.05);
+        const frames = dt * 60;
+        state.spin += 0.0016 * frames;
+        state.elapsed += dt;
+        state.pointer.x += (state.target.x - state.pointer.x) * 0.04;
+        state.pointer.y += (state.target.y - state.pointer.y) * 0.04;
+        rig.rotation.y = state.spin + state.pointer.y;
+        rig.rotation.x = state.pointer.x;
+        core.rotation.x = Math.sin(state.elapsed * 0.32) * 0.06;
+        rings[0].rotation.z += 0.0024 * frames;
+        rings[1].rotation.x += -0.0018 * frames;
+        renderer.render(scene, camera);
+        state.raf = requestAnimationFrame(renderFrame);
+      };
+      state.onPointer = (event) => {
+        const nx = event.clientX / innerWidth * 2 - 1;
+        const ny = event.clientY / innerHeight * 2 - 1;
+        state.target.y = Math.max(-0.1, Math.min(0.1, nx * 0.1));
+        state.target.x = Math.max(-0.1, Math.min(0.1, -ny * 0.1));
+      };
+      state.onVisibility = () => { if (document.visibilityState === "visible") resume(); };
+      state.observer = new IntersectionObserver((entries) => {
+        state.inView = entries[0].isIntersecting;
+        if (state.inView) resume();
+      });
+      state.resize = new ResizeObserver(fit);
+      window.addEventListener("pointermove", state.onPointer);
+      document.addEventListener("visibilitychange", state.onVisibility);
+      state.observer.observe(slot);
+      state.resize.observe(slot);
+      active = state;
+      if (token !== generation) {
+        stopScene();
+        return;
+      }
+      slot.classList.add("is-live");
+      state.raf = requestAnimationFrame(renderFrame);
+    }
+
+    async function syncScene() {
+      const token = ++generation;
+      stopScene();
+      if (narrow.matches || reduced.matches) return;
+      try {
+        await startScene(token);
+      } catch {
+        if (token === generation) stopScene();
+      }
+    }
+
+    narrow.addEventListener("change", syncScene);
+    reduced.addEventListener("change", syncScene);
+    syncScene();
   </script>
 </body>
 </html>
